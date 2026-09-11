@@ -1,11 +1,10 @@
 #include <iostream>
 #include "lib/handleLog.cpp"
-#include "classes/Register.hpp"
+#include "classes/Log.hpp"
 using namespace std;
 
 int main() {
-	vector<Register> logs = readLogFile();
-
+	vector<Log> logs = readLogFile();
 
 	return 0;
 }

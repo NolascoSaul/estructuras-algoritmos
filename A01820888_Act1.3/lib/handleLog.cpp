@@ -1,12 +1,12 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
-#include "../classes/Register.hpp"
+#include "../classes/Log.hpp"
 
 using namespace std;
 
-vector<Register> readLogFile() {
-	vector<Register> registers;
+vector<Log> readLogFile() {
+	vector<Log> logs;
 	ifstream logFile("bitacora.txt");
 
 	string month, time, ipStr, message;
@@ -26,11 +26,11 @@ vector<Register> readLogFile() {
 		Ip ip(ipStr);
 		string dateStr = month + " " + to_string(day) + " " + time;
 
-		Register reg(date, ip, dateStr, ipStr, message);
+		Log log(date, ip, dateStr, ipStr, message);
 
-		registers.push_back(reg);
+		logs.push_back(log);
 	}
 
 	logFile.close();
-	return registers;
+	return logs;
 }
