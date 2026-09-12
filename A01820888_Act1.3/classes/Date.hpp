@@ -11,23 +11,36 @@ private:
 public:
 	Date(string monthStr_, int day_, int hour_, int min_, int sec_) :
 		monthStr(monthStr_), day(day_), hour(hour_), min(min_), sec(sec_) {
-		monthToNumber(monthStr);
+		month = monthToNumber(monthStr_);
 	}
 
-	void monthToNumber(string monthString) {
-		if (monthString == "Jan") month = 1;
-		else if (monthString == "Feb") month = 2;
-		else if (monthString == "Mar") month = 3;
-		else if (monthString == "Apr") month = 4;
-		else if (monthString == "May") month = 5;
-		else if (monthString == "Jun") month = 6;
-		else if (monthString == "Jul") month = 7;
-		else if (monthString == "Aug") month = 8;
-		else if (monthString == "Sep") month = 9;
-		else if (monthString == "Oct") month = 10;
-		else if (monthString == "Nov") month = 11;
-		else if (monthString == "Dec") month = 12;
-		else month = 0;
+	Date(int month_, int day_, int hour_, int min_, int sec_)
+		: month(month_), day(day_), hour(hour_), min(min_), sec(sec_) {
+		monthStr = numToMonthStr(month_);
+	}
+
+	int monthToNumber(string monthString) {
+		if (monthString == "Jan") return 1;
+		else if (monthString == "Feb") return 2;
+		else if (monthString == "Mar") return 3;
+		else if (monthString == "Apr") return 4;
+		else if (monthString == "May") return 5;
+		else if (monthString == "Jun") return 6;
+		else if (monthString == "Jul") return 7;
+		else if (monthString == "Aug") return 8;
+		else if (monthString == "Sep") return 9;
+		else if (monthString == "Oct") return 10;
+		else if (monthString == "Nov") return 11;
+		else if (monthString == "Dec") return 12;
+
+		return 0;
+	}
+
+	string numToMonthStr(int monthNum) {
+		const string months[] = { "", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+										"Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+		if (monthNum >= 1 && monthNum <= 12) return months[monthNum];
+		return "Jan";
 	}
 
 	bool operator<(const Date& dateToCompare) const {
@@ -60,6 +73,10 @@ public:
 			return false;
 
 		return sec == dateToCompare.sec;
+	}
+
+	bool operator>=(const Date& dateToCompare) const {
+		return !(*this < dateToCompare);
 	}
 
 	bool operator!=(const Date& dateToCompare) const {

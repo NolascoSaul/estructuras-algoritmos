@@ -36,3 +36,13 @@ vector<Log> readLogFile() {
 	logFile.close();
 	return logs;
 }
+
+void saveSortedLogs(const vector<Log>& logs) {
+	ofstream outFile("sorted.txt");
+
+	for (const auto& log : logs) {
+		outFile << log.dateStr << " " << log.ipStr << " " << log.message << "\n";
+	}
+
+	outFile.close();
+}

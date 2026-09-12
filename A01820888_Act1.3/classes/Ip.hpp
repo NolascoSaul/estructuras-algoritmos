@@ -2,10 +2,11 @@
 #include <iostream>
 
 class Ip {
-public:
+private:
 	int firstByte, secondByte, thirdByte, fourthByte;
 	int port;
 
+public:
 	Ip(string ipStr) {
 		sscanf(
 			ipStr.c_str(),
