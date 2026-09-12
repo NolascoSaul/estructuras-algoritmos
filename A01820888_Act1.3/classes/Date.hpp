@@ -46,7 +46,23 @@ public:
 		return sec < dateToCompare.sec;
 	}
 
-	bool operator>(const Date& dateToCompare) const {
-		return dateToCompare < *this;
+	bool operator==(const Date& dateToCompare) const {
+		if (month != dateToCompare.month)
+			return false;
+
+		if (day != dateToCompare.day)
+			return false;
+
+		if (hour != dateToCompare.hour)
+			return false;
+
+		if (min != dateToCompare.min)
+			return false;
+
+		return sec == dateToCompare.sec;
+	}
+
+	bool operator!=(const Date& dateToCompare) const {
+		return !(*this == dateToCompare);
 	}
 };

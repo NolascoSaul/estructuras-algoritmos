@@ -1,6 +1,8 @@
 #include <iostream>
-#include "lib/handleLog.cpp"
+#include "lib/handleLog.hpp"
+#include "lib/mergeSort.hpp"
 #include "classes/Log.hpp"
+
 using namespace std;
 
 int main() {

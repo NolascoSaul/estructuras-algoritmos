@@ -2,11 +2,10 @@
 #include <iostream>
 
 class Ip {
-private:
+public:
 	int firstByte, secondByte, thirdByte, fourthByte;
 	int port;
 
-public:
 	Ip(string ipStr) {
 		sscanf(
 			ipStr.c_str(),
@@ -31,7 +30,23 @@ public:
 		return port < ipToCompare.port;
 	}
 
-	bool operator>(const Ip& ipToCompare) const {
-		return ipToCompare < *this;
+	bool operator==(const Ip& ipToCompare) const {
+		if (firstByte != ipToCompare.firstByte)
+			return false;
+
+		if (secondByte != ipToCompare.secondByte)
+			return false;
+
+		if (thirdByte != ipToCompare.thirdByte)
+			return false;
+
+		if (fourthByte != ipToCompare.fourthByte)
+			return false;
+
+		return port == ipToCompare.port;
+	}
+
+	bool operator!=(const Ip& ipToCompare) const {
+		return !(*this == ipToCompare);
 	}
 };

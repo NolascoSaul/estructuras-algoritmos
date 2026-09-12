@@ -14,14 +14,13 @@ struct Log {
 		: date(date_), ip(ip_), dateStr(dateStr_), ipStr(ipStr_), message(message_) {
 	}
 
-	bool operator<(const Log& other) const {
-		if (date < other.date) return true;
-		if (other.date < date) return false;
+	bool operator<=(const Log& logToCompare) const {
+		if (date != logToCompare.date)
+			return date < logToCompare.date;
 
-		return ip < other.ip;
-	}
+		if (ip < logToCompare.ip)
+			return ip < logToCompare.ip;
 
-	bool operator<=(const Log& other) const {
-		return !(other < *this);
+		return message < logToCompare.message;
 	}
 };
