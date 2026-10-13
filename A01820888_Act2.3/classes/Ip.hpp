@@ -3,8 +3,8 @@
 
 class Ip {
 private:
-	int firstByte, secondByte, thirdByte, fourthByte;
-	int port;
+	int firstByte = 0, secondByte = 0, thirdByte = 0, fourthByte = 0;
+	int port = 0;
 
 public:
 	Ip(string ipStr) {
@@ -49,5 +49,13 @@ public:
 
 	bool operator!=(const Ip& ipToCompare) const {
 		return !(*this == ipToCompare);
+	}
+
+	bool operator<=(const Ip& ipToCompare) const {
+		return *this < ipToCompare || *this == ipToCompare;
+	}
+
+	bool operator>=(const Ip& ipToCompare) const {
+		return !(*this < ipToCompare);
 	}
 };

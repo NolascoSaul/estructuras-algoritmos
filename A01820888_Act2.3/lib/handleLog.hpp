@@ -1,14 +1,15 @@
 #pragma once
 
 #include <iostream>
-#include <vector>
 #include <fstream>
+#include <string>
 #include "../classes/Log.hpp"
+#include "../classes/LinkedList.hpp"
 
 using namespace std;
 
-vector<Log> readLogFile() {
-	vector<Log> logs;
+DoubleLinkedList readLogFile() {
+	DoubleLinkedList list;
 	ifstream logFile("bitacora.txt");
 
 	string month, time, ipStr, message;
@@ -26,22 +27,26 @@ vector<Log> readLogFile() {
 
 		Date date(month, day, hour, min, sec);
 		Ip ip(ipStr);
-		string dateStr = month + " " + to_string(day) + " " + time;
+
+		string dayStr = (day < 10 ? "0" : "") + to_string(day);
+		string dateStr = month + " " + dayStr + " " + time;
 
 		Log log(date, ip, dateStr, ipStr, message);
 
-		logs.push_back(log);
+		list.append(log);
 	}
 
 	logFile.close();
-	return logs;
+	return list;
 }
 
-void saveSortedLogs(const vector<Log>& logs) {
-	ofstream outFile("sorted.txt");
+void saveSortedLogs(const DoubleLinkedList& list) {
+	ofstream outFile("SortedData.txt");
 
-	for (const auto& log : logs) {
-		outFile << log.dateStr << " " << log.ipStr << " " << log.message << "\n";
+	Node* current = list.head;
+	while (current) {
+		outFile << current->data.dateStr << " " << current->data.ipStr << " " << current->data.message << "\n";
+		current = current->next;
 	}
 
 	outFile.close();

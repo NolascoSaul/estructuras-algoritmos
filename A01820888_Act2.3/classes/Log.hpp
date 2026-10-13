@@ -15,12 +15,12 @@ struct Log {
 	}
 
 	bool operator<=(const Log& logToCompare) const {
+		if (ip != logToCompare.ip)
+			return ip < logToCompare.ip;
+
 		if (date != logToCompare.date)
 			return date < logToCompare.date;
 
-		if (ip < logToCompare.ip)
-			return ip < logToCompare.ip;
-
-		return message < logToCompare.message;
+		return message <= logToCompare.message;
 	}
 };
