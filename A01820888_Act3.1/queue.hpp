@@ -1,61 +1,46 @@
 #pragma once
 
 template<class T>
-struct QNode {
-	T data;
-	QNode* next;
-	QNode(T val) : data(val), next(nullptr) {}
-};
-
-template<class T>
 class Queue {
 private:
-	QNode<T>* head;
-	QNode<T>* tail;
+	static const int MAX = 1024;
+	T data[MAX];
+	int frontIdx, endIdx;
 
 public:
 	Queue() {
-		head = nullptr;
-		tail = nullptr;
-	}
-
-	~Queue() {
-		while (!isEmpty()) {
-			pop();
-		}
+		frontIdx = endIdx = -1;
 	}
 
 	void push(T value) {
-		QNode<T>* newNode = new QNode<T>(value);
-		if (isEmpty()) {
-			head = tail = newNode;
-		} else {
-			tail->next = newNode;
-			tail = newNode;
-		}
+		if (isFull()) return;
+
+		if (frontIdx == -1) frontIdx = 0;
+		endIdx = (endIdx + 1) % MAX;
+		data[endIdx] = value;
 	}
 
 	T front() {
-		if (!isEmpty()) return head->data;
+		if (!isEmpty()) return data[frontIdx];
 		return nullptr;
 	}
 
 	T pop() {
-		if (isEmpty()) return nullptr;
+		T value = data[frontIdx];
+		if (frontIdx == endIdx)
+			frontIdx = endIdx = -1;
+		else
+			frontIdx = (frontIdx + 1) % MAX;
 
-		QNode<T>* temp = head;
-		T value = temp->data;
-
-		head = head->next;
-		if (head == nullptr) {
-			tail = nullptr;
-		}
-
-		delete temp;
 		return value;
 	}
 
 	bool isEmpty() {
-		return head == nullptr;
+		return frontIdx == -1;
+	}
+
+	bool isFull() {
+		if (isEmpty()) return false;
+		return (endIdx + 1) % MAX == frontIdx;
 	}
 };
