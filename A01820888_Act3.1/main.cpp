@@ -1,3 +1,16 @@
+/*
+	Programa que lee un número de nodos y los inserta
+	en un árbol binario de búsqueda (BST), para
+	posteriormente realizar operaciones avanzadas.
+
+	Autores:
+	- David Medel de la Trinidad		A01821075
+	- Judith Juquila Lopez Estudillo	A00845789
+	- Saul Gabriel Nolasco Cen			A01820888
+
+	Fecha: 24/10/2026
+*/
+
 #include <iostream>
 #include "bst.hpp"
 
