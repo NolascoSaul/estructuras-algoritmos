@@ -16,6 +16,11 @@ struct Node {
 
 class BinSearchTree {
 private:
+	/*
+	- Elimina recursivamente todos los nodos del árbol (Postorden).
+	- Complejidad Temporal: O(N)
+	- Complejidad Espacial: O(h) por la pila de recursión.
+	*/
 	void clear(Node* node) {
 		if (node) {
 			clear(node->left);
@@ -24,6 +29,11 @@ private:
 		}
 	}
 
+	/*
+	- Recorrido Raíz-Izquierda-Derecha.
+	- Complejidad Temporal: O(N)
+	- Complejidad Espacial: O(h) por la pila de recursión.
+	*/
 	void preorder(Node* root) {
 		if (root) {
 			cout << root->data << " ";
@@ -32,6 +42,11 @@ private:
 		}
 	}
 
+	/*
+	- Recorrido Izquierda-Raíz-Derecha.
+	- Complejidad Temporal: O(N)
+	- Complejidad Espacial: O(h) por la pila de recursión.
+	*/
 	void inorder(Node* root) {
 		if (root) {
 			inorder(root->left);
@@ -40,6 +55,11 @@ private:
 		}
 	}
 
+	/*
+	- Recorrido Izquierda-Derecha-Raíz.
+	- Complejidad Temporal: O(N)
+	- Complejidad Espacial: O(h) por la pila de recursión.
+	*/
 	void postorder(Node* root) {
 		if (root) {
 			postorder(root->left);
@@ -48,6 +68,11 @@ private:
 		}
 	}
 
+	/*
+	- Recorrido por niveles de arriba hacia abajo usando una Cola FIFO.
+	- Complejidad Temporal: O(N)
+	- Complejidad Espacial: O(W) donde W es el ancho máximo del árbol.
+	*/
 	void levelorder(Node* root) {
 		if (!root) return;
 
@@ -76,6 +101,11 @@ public:
 		clear(root);
 	}
 
+	/*
+	- Inserta un nuevo valor de forma iterativa, ignorando duplicados.
+	- Complejidad Temporal: O(h)
+	- Complejidad Espacial: O(1)
+	*/
 	void insert(int value) {
 		if (root == nullptr) {
 			root = new Node(value);
@@ -101,6 +131,11 @@ public:
 			parent->right = new Node(value);
 	}
 
+	/*
+	- Selector de tipo de recorrido.
+	- Complejidad Temporal: O(N)
+	- Complejidad Espacial: Depende del recorrido elegido.
+	*/
 	void traversal(int n) {
 		switch (n) {
 		case 1:
@@ -122,12 +157,22 @@ public:
 		}
 	}
 
+	/*
+	- Calcula el número de niveles del árbol recursivamente.
+	- Complejidad Temporal: O(N)
+	- Complejidad Espacial: O(h) por la pila de recursión.
+	*/
 	int height(Node* root) {
 		if (!root) return 0;
 
 		return 1 + max(height(root->left), height(root->right));
 	}
 
+	/*
+	- Imprime el camino desde la raíz hasta el nodo buscado de forma iterativa.
+	- Complejidad Temporal: O(h)
+	- Complejidad Espacial: O(1)
+	*/
 	void ancestors(int value) {
 		if (whatlevelamI(value) == -1) return;
 
@@ -147,6 +192,11 @@ public:
 		cout << endl;
 	}
 
+	/*
+	- Elimina un nodo iterativamente manejando los 3 casos (0, 1 o 2 hijos).
+	- Complejidad Temporal: O(h)
+	- Complejidad Espacial: O(1)
+	*/
 	void erase(int value) {
 		Node* current = root;
 		Node* parent = nullptr;
@@ -192,6 +242,11 @@ public:
 		}
 	}
 
+	/*
+	- Busca la profundidad iterativamente contando los saltos desde la raíz.
+	- Complejidad Temporal: O(h)
+	- Complejidad Espacial: O(1)
+	*/
 	int whatlevelamI(int value) {
 		int level = 0;
 
