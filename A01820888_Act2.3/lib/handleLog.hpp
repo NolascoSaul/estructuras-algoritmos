@@ -8,8 +8,7 @@
 
 using namespace std;
 
-DoubleLinkedList readLogFile() {
-	DoubleLinkedList list;
+void readLogFile(DoubleLinkedList& list) {
 	ifstream logFile("bitacora.txt");
 
 	string month, time, ipStr, message;
@@ -37,7 +36,6 @@ DoubleLinkedList readLogFile() {
 	}
 
 	logFile.close();
-	return list;
 }
 
 void saveSortedLogs(const DoubleLinkedList& list) {

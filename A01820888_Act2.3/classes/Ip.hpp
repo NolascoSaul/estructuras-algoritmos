@@ -8,11 +8,12 @@ private:
 
 public:
 	Ip(string ipStr) {
-		sscanf(
-			ipStr.c_str(),
-			"%d.%d.%d.%d:%d",
-			&firstByte, &secondByte, &thirdByte, &fourthByte, &port
-		);
+		if (ipStr.find(':') == string::npos) {
+			sscanf(ipStr.c_str(), "%d.%d.%d.%d", &firstByte, &secondByte, &thirdByte, &fourthByte);
+			port = 65535;
+		} else {
+			sscanf(ipStr.c_str(), "%d.%d.%d.%d:%d", &firstByte, &secondByte, &thirdByte, &fourthByte, &port);
+		}
 	}
 
 	bool operator<(const Ip& ipToCompare) const {

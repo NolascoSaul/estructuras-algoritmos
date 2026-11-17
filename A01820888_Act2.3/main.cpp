@@ -20,7 +20,8 @@
 using namespace std;
 
 int main() {
-	DoubleLinkedList list = readLogFile();
+	DoubleLinkedList list;
+	readLogFile(list);
 
 	list.head = mergeSort(list.head);
 
@@ -36,6 +37,7 @@ int main() {
 	cin >> startIpStr;
 	cin >> endIpStr;
 
+	if (startIpStr.find(':') == string::npos) startIpStr += ":0";
 	Ip startIp(startIpStr);
 	Ip endIp(endIpStr);
 

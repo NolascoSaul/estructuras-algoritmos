@@ -26,7 +26,9 @@ vector<Log> readLogFile() {
 
 		Date date(month, day, hour, min, sec);
 		Ip ip(ipStr);
-		string dateStr = month + " " + to_string(day) + " " + time;
+		
+		string dayStr = (day < 10 ? "0" : "") + to_string(day);
+		string dateStr = month + " " + dayStr + " " + time;
 
 		Log log(date, ip, dateStr, ipStr, message);
 
