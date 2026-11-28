@@ -1,5 +1,6 @@
 /*
-	Programa que...
+	Programa que ordena un arreglo de números usando intercambio, burbuja y merge sort,
+	cuenta sus comparaciones y realiza consultas con búsqueda secuencial y binaria.
 
 	Autores:
 	- David Medel de la Trinidad	A01821075
@@ -30,11 +31,15 @@ int main() {
 		arrMerge[i] = aux;
 	}
 
-	ordenaIntercambio(arrInter, n);
-	ordenaBurbuja(arrBubble, n);
-	ordenaMerge(arrMerge, 0, n - 1);
+	int compInter = 0;
+	int compBubble = 0;
+	int compMerge = 0;
 
-	cout << "AQUI IRIAN LAS COMPARACIONES DE CADA ORDENAMIENTO" << endl;
+	ordenaIntercambio(arrInter, n, compInter);
+	ordenaBurbuja(arrBubble, n, compBubble);
+	ordenaMerge(arrMerge, 0, n - 1, compMerge);
+
+	cout << compInter << " " << compBubble << " " << compMerge << endl;
 
 	int q = 0;
 	cin >> q;
@@ -42,8 +47,13 @@ int main() {
 		int target;
 		cin >> target;
 
-		cout << busqBinaria(arrBubble, target, n) << " ";
-		cout << "bS bB" << endl;
+		int compSec = 0;
+		int compBin = 0;
+
+		int pos = busqSecuencial(arrBubble, target, n, compSec);
+		busqBinaria(arrBubble, target, n, compBin);
+
+		cout << pos << " " << compSec << " " << compBin << endl;
 	}
 
 	return 0;
